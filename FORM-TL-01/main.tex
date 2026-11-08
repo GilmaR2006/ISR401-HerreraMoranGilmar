@@ -1,0 +1,223 @@
+% =====================================================================
+% FORM-TL-01 -- Taller de identificación y clasificación de requisitos
+% Compilar con: pdflatex main.tex  (dos pasadas). Ver README.md
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=1.65cm,headheight=14pt]{geometry}
+\usepackage{tabularx,booktabs,longtable,array}
+\usepackage{enumitem}
+\usepackage[table]{xcolor}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{microtype}
+\hypersetup{colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black,citecolor=blue!50!black}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\setlist{nosep,leftmargin=*}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small UTEQ -- Ingeniería de Requerimientos (ISR-401)}
+\rhead{\small FORM-TL-01}
+\cfoot{\thepage}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcommand{\campo}[1]{\textcolor{gray}{\textit{#1}}}
+\newcommand{\cab}{\rowcolor{gray!18}}
+
+
+\begin{document}
+\begin{center}
+{\large\textbf{UNIVERSIDAD TÉCNICA ESTATAL DE QUEVEDO}}\\
+Facultad de Ciencias de la Computación -- Carrera de Ingeniería en Software\\[5pt]
+{\Large\textbf{FORM-TL-01}}\\
+{\large Taller de identificación y clasificación de tipos de requisitos}\\[4pt]
+\textbf{Asignatura:} Ingeniería de Requerimientos (ISR-401) \quad
+\textbf{Docente:} Gleiston Cicerón Guerrero Ulloa, PhD
+\end{center}
+\vspace{2pt}
+\begin{tabularx}{\textwidth}{@{}lY lY@{}}
+\textbf{Estudiante:} & Herrera Moran Gilmar Javier  \estudiante &
+\textbf{Nivel/paralelo:} & 4.\textsuperscript{o} nivel, paralelo A\\
+\textbf{Fecha:} & 7 de noviembre del 2026 \fechaentrega &
+\textbf{Actividad:} & Formativa (sin calificación)\\
+\textbf{Repositorio:} & https://github.com/GilmaR2006/ISR401-HerreraMoranGilmar \multicolumn{3}{l}{\urlrepo}
+\end{tabularx}
+\hrule
+
+%---------------------------------------------------------------------
+\section{Introducción}
+Este taller clasifica los veinte enunciados del caso «Plataforma de gestión de citas médicas» del Policlínico Ribera del Quevedo en tres dimensiones: \emph{tipo} (funcional, calidad con su característica ISO/IEC 25010:2023, o restricción), \emph{ámbito} (producto o proceso) y \emph{nivel} (sistema o software). Cada decisión se justifica en una línea con la definición de ISO/IEC/IEEE 29148:2018 \cite{iso29148,pohl}. Después se reescriben cinco requisitos de calidad vagos con métrica, unidad, umbral y forma de verificación, apoyándose en los datos del caso, y se deja registrado el contraste con un compañero.
+
+%---------------------------------------------------------------------
+\section{Criterios y definiciones usadas}
+Las definiciones están parafraseadas de \cite{iso29148,iso25010,pohl}; conviene contrastarlas con el texto del estándar disponible en la biblioteca digital.
+
+\small
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{2.7cm}Y@{}}
+\toprule
+\cab Categoría & Criterio aplicado \\
+\midrule
+Funcional & Especifica una función o servicio que el sistema o uno de sus elementos debe poder realizar \cite{iso29148}.\\
+Calidad & Especifica qué tan bien debe comportarse el producto; es una propiedad que se puede medir y se asigna a una característica y subcaracterística de ISO/IEC 25010:2023 \cite{iso25010}.\\
+Restricción & Limitación impuesta desde fuera al sistema, a sus requisitos, diseño o implementación, o al proceso de desarrollo (tecnológica, legal, de plazo o de método) \cite{iso29148}.\\
+Producto / Proceso & \emph{Producto}: propiedad o comportamiento de la solución entregada. \emph{Proceso}: condición sobre cómo se planifica, desarrolla, revisa o valida el proyecto.\\
+Sistema / Software & \emph{Sistema}: involucra más que la aplicación (hardware como el quiosco, servicios externos, infraestructura, personas o la plataforma completa). \emph{Software}: comportamiento o condición de la aplicación y su código.\\
+\bottomrule
+\end{tabularx}
+\normalsize
+
+%---------------------------------------------------------------------
+\section{Clasificación de los 20 enunciados}
+\begingroup
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}p{0.95cm}p{1.75cm}p{3.1cm}p{1.45cm}p{1.35cm}p{7.6cm}@{}}
+\toprule
+\cab\textbf{Cód.} & \textbf{Tipo} & \textbf{Característica $\rightarrow$ subcaracterística (ISO 25010:2023)} & \textbf{Ámbito} & \textbf{Nivel} & \textbf{Justificación (una línea, con 29148)} \\
+\midrule
+\endfirsthead
+\toprule
+\cab\textbf{Cód.} & \textbf{Tipo} & \textbf{Característica $\rightarrow$ subcaracterística (ISO 25010:2023)} & \textbf{Ámbito} & \textbf{Nivel} & \textbf{Justificación (una línea, con 29148)} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{6}{r}{\emph{Continúa en la página siguiente}}\\
+\endfoot
+\bottomrule
+\endlastfoot
+E01 & Funcional & -- & Producto & Software & Función que el software debe realizar \cite{iso29148}: reservar eligiendo especialidad, médico, fecha y hora.\\
+E02 & Funcional & -- & Producto & Sistema & Función que la plataforma debe ejecutar \cite{iso29148}: enviar SMS 24 h antes; depende de un servicio externo de mensajería.\\
+E03 & Calidad & Eficiencia de desempeño $\rightarrow$ Comportamiento temporal & Producto & Software & Propiedad medible (tiempo de respuesta), no una función; «rápida» no es verificable \cite{iso25010}.\\
+E04 & Funcional & -- & Producto & Software & Función de la aplicación \cite{iso29148}: registrar la llegada del paciente en ventanilla.\\
+E05 & Restricción & -- & Producto & Software & Limitación impuesta a la implementación \cite{iso29148}: Java 21 y PostgreSQL.\\
+E06 & Funcional & -- & Producto & Software & Función para el médico \cite{iso29148}: consultar la lista del día y marcar consultas atendidas.\\
+E07 & Calidad & Seguridad $\rightarrow$ Confidencialidad & Producto & Sistema & Propiedad de toda la plataforma (red, datos, servidores): impedir acceso no autorizado a datos de salud \cite{iso25010}.\\
+E08 & Restricción & -- & Producto & Software & Condición de entorno impuesta a la app móvil \cite{iso29148}: Android 10 o superior.\\
+E09 & Funcional & -- & Producto & Software & Regla de negocio (dominio) que el software debe aplicar \cite{iso29148}: cancelación tardía $\Rightarrow$ inasistencia.\\
+E10 & Calidad & Capacidad de interacción $\rightarrow$ Inclusividad (y Operabilidad) & Producto & Software & Propiedad de uso por adultos mayores \cite{iso25010}; «fácil» no es verificable.\\
+E11 & Restricción & -- & Proceso & Sistema & Límite de plazo impuesto al proyecto completo \cite{iso29148}, no a una propiedad del producto.\\
+E12 & Funcional & -- & Producto & Software & Comportamiento observable ya cuantificado \cite{iso29148}: cierre de sesión a los 10 min (discutible, ver §6).\\
+E13 & Funcional & -- & Producto & Sistema & Función que combina quiosco (pantalla, impresora) y plataforma \cite{iso29148}: leer la cédula e imprimir el ticket.\\
+E14 & Calidad & Fiabilidad $\rightarrow$ Disponibilidad & Producto & Sistema & Servicio completo operativo cuando se necesita \cite{iso25010}; «siempre» no es verificable.\\
+E15 & Funcional & -- & Producto & Software & Función de información \cite{iso29148}: reporte mensual de inasistencias por especialidad.\\
+E16 & Restricción & -- & Proceso & Sistema & Método impuesto al proceso de desarrollo \cite{iso29148}: validar cada incremento con el director médico.\\
+E17 & Restricción & -- & Producto & Sistema & Limitación legal externa \cite{iso29148,lopdp}: cómo se tratan los datos personales de los pacientes.\\
+E18 & Calidad & Compatibilidad $\rightarrow$ Interoperabilidad & Producto & Sistema & Intercambio correcto con otro sistema \cite{iso25010}; «sin problemas» no es verificable.\\
+E19 & Calidad & Fiabilidad $\rightarrow$ Recuperabilidad & Producto & Sistema & Propiedad de recuperación ante falla del servidor \cite{iso25010}; ya está cuantificada (30 min, cero citas perdidas).\\
+E20 & Restricción & -- & Proceso & Software & Regla impuesta al proceso de integración del código fuente \cite{iso29148}: revisión por otro integrante.\\
+\end{longtable}
+\endgroup
+
+%---------------------------------------------------------------------
+\section{Reformulación de los cinco requisitos de calidad vagos}
+Los enunciados vagos son E03, E07, E10, E14 y E18; los demás de calidad (E19) ya incluyen umbral. Todos incumplen las propiedades de ambigüedad y verificabilidad \cite{iso29148}: no definen métrica, carga, usuarios ni umbral. Los valores propuestos parten de los datos del caso (300 usuarios concurrentes los lunes a las 07:00, 450 citas por día, 35\,\% de pacientes mayores de 60 años, teléfonos Android de gama media o baja, atención de lunes a sábado). Son propuestas de aceptación que deben validarse con el director médico y el área de TI.
+
+\begingroup
+\small
+\newcommand{\rqhead}[1]{\subsection*{#1}\vspace{-2pt}}
+
+\rqhead{E03 -- Rapidez (Eficiencia de desempeño $\rightarrow$ Comportamiento temporal)}
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{3.15cm}Y@{}}
+\toprule
+Original y defecto & «La aplicación debe ser rápida.» Ambiguo y no verificable: sin operación, carga ni valor.\\
+Requisito reescrito & Con 300 usuarios conectados al mismo tiempo (pico de los lunes a las 07:00), el 95\,\% de las solicitudes de consulta de disponibilidad, reserva, reprogramación y cancelación de citas deberá responder en $\leq$ 2 s, con una tasa de error del servidor inferior al 1\,\%.\\
+Métrica y unidad & Percentil 95 del tiempo de respuesta (segundos); tasa de solicitudes con error (\%).\\
+Umbral & P95 $\leq$ 2 s; errores $<$ 1\,\%.\\
+Verificación & Prueba de carga de 30 min con 300 usuarios virtuales sobre el entorno de aceptación, antes de cada entrega mayor.\\
+\bottomrule
+\end{tabularx}
+
+\rqhead{E07 -- Seguridad (Seguridad $\rightarrow$ Confidencialidad)}
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{3.15cm}Y@{}}
+\toprule
+Original y defecto & «Los datos de salud de los pacientes deben estar seguros.» Ambiguo: no indica de qué amenaza ni cómo comprobarlo.\\
+Requisito reescrito & El 100\,\% de las comunicaciones usará TLS 1.2 o superior; los datos de salud se almacenarán cifrados; cada rol (paciente, recepcionista, médico, director médico, administrador, TI) solo accederá a los recursos autorizados; y no existirán hallazgos críticos o altos abiertos en la prueba de seguridad previa a la puesta en producción.\\
+Métrica y unidad & \% de comunicaciones con TLS $\geq$ 1.2; \% de intentos no autorizados rechazados en la matriz rol $\times$ recurso; número de hallazgos críticos/altos abiertos.\\
+Umbral & 100\,\%; 100\,\%; 0 hallazgos.\\
+Verificación & Escaneo de configuración TLS, casos de prueba de autorización por cada celda de la matriz y prueba de seguridad basada en OWASP Top 10. Alineado con la LOPDP (E17) \cite{lopdp}.\\
+\bottomrule
+\end{tabularx}
+
+\rqhead{E10 -- Facilidad de uso (Capacidad de interacción $\rightarrow$ Inclusividad y Operabilidad)}
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{3.15cm}Y@{}}
+\toprule
+Original y defecto & «La plataforma debe ser fácil de usar para los pacientes adultos mayores.» Subjetivo y no verificable.\\
+Requisito reescrito & En una prueba con al menos 10 pacientes de 60 años o más, usando un teléfono Android de gama media y tras una instrucción inicial de no más de 2 min, al menos el 90\,\% deberá reservar una cita sin ayuda en un máximo de 3 min, y la escala SUS promedio deberá ser $\geq$ 70.\\
+Métrica y unidad & \% de participantes que completan la tarea sin ayuda; tiempo por tarea (min); puntaje SUS (0--100).\\
+Umbral & $\geq$ 90\,\% (9 de 10); $\leq$ 3 min; SUS $\geq$ 70.\\
+Verificación & Prueba de usabilidad observada con tarea «reservar una cita» y cuestionario SUS. Base: 35\,\% de los pacientes supera los 60 años.\\
+\bottomrule
+\end{tabularx}
+
+\rqhead{E14 -- Disponibilidad (Fiabilidad $\rightarrow$ Disponibilidad)}
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{3.15cm}Y@{}}
+\toprule
+Original y defecto & «La plataforma debe estar siempre disponible.» «Siempre» (100\,\%) no es alcanzable ni medible.\\
+Requisito reescrito & La plataforma tendrá una disponibilidad mensual de al menos 99,5\,\% medida las 24 h del día (unas 3 h 36 min de indisponibilidad máxima al mes), sin ninguna interrupción continua mayor a 30 min. El mantenimiento planificado solo se hará los domingos (el policlínico no atiende), con aviso de 48 h y como máximo 4 h, y no cuenta como indisponibilidad.\\
+Métrica y unidad & Tiempo operativo $\div$ tiempo comprometido (\% mensual); duración de la interrupción más larga (min).\\
+Umbral & $\geq$ 99,5\,\%; $\leq$ 30 min por interrupción.\\
+Verificación & Monitoreo sintético cada minuto durante la operación y reporte mensual.\\
+\bottomrule
+\end{tabularx}
+
+\rqhead{E18 -- Integración con facturación (Compatibilidad $\rightarrow$ Interoperabilidad)}
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{3.15cm}Y@{}}
+\toprule
+Original y defecto & «Debe integrarse sin problemas con el sistema de facturación actual.» «Sin problemas» no es verificable.\\
+Requisito reescrito & Al menos el 99\,\% de las solicitudes válidas de registro de cobro enviadas a la interfaz de servicios web documentada por el proveedor deberá completarse correctamente en un máximo de 5 s, sin generar cobros duplicados, y el 100\,\% de los mensajes deberá ajustarse a la especificación del proveedor.\\
+Métrica y unidad & \% de solicitudes exitosas; tiempo de respuesta (s); número de cobros duplicados; \% de mensajes conformes.\\
+Umbral & $\geq$ 99\,\%; $\leq$ 5 s; 0 duplicados; 100\,\%.\\
+Verificación & Pruebas de integración con al menos 200 solicitudes válidas contra el entorno de pruebas del proveedor, incluyendo reenvíos por fallo de red.\\
+\bottomrule
+\end{tabularx}
+\endgroup
+
+%---------------------------------------------------------------------
+\section{Discrepancias y resolución con un compañero}
+Contrasté mi clasificación con el documento FORM-TL-01 de mi compañero Angelo Espinoza Pivaque. De los veinte enunciados, las clasificaciones coinciden en E01, E03--E06, E08, E09, E12--E15 y E17--E20; las diferencias están en los que siguen. La columna «Acuerdo» recoge la decisión que adopto y su argumento. 
+
+\small
+\begin{tabularx}{\textwidth}{@{}p{1.0cm}p{4.2cm}p{4.6cm}Y@{}}
+\toprule
+\cab\textbf{Cód.} & \textbf{Mi clasificación y razón} & \textbf{Clasificación del compañero y razón} & \textbf{Acuerdo y argumento} \\
+\midrule
+E02 & Funcional / producto / \emph{sistema}: el recordatorio solo existe si un servicio externo entrega el SMS. & Funcional / producto / \emph{software}: la aplicación programa y solicita el envío; la entrega del SMS la hace un tercero. & Se mantiene \emph{sistema}, aclarando que programar el envío es software y entregarlo implica al proveedor de mensajería. La diferencia depende del límite que se considere.\\
+E07 & Seguridad $\rightarrow$ Confidencialidad: la reformulación se centra en impedir accesos no autorizados. & Seguridad $\rightarrow$ Confidencialidad e Integridad: incluye la protección frente a modificaciones indebidas. & Se mantiene Confidencialidad como subcaracterística principal; Integridad es pertinente pero el enunciado no la exige expresamente.\\
+E10 & Capacidad de interacción $\rightarrow$ Inclusividad (y Operabilidad) / \emph{software}. & Capacidad de interacción $\rightarrow$ Operabilidad e Inclusividad / \emph{sistema}, porque incluye el quiosco. & Coincidimos en las subcaracterísticas. Mantengo \emph{software}: la prueba propuesta se hace sobre la app móvil; el quiosco queda como alcance posible a validar.\\
+E11 & Restricción / proceso / \emph{sistema}: el plazo afecta al proyecto completo. & Restricción / proceso / «no aplica directamente» en nivel, porque no describe una propiedad del producto. & Se mantiene \emph{sistema}: la guía pide clasificar en las tres dimensiones y el plazo recae sobre la entrega de toda la solución. «No aplica» es una lectura defendible.\\
+E16 & Restricción / proceso / \emph{sistema}: la validación involucra al director médico. & Restricción / proceso / «no aplica directamente» en nivel. & Se mantiene \emph{sistema} por el mismo criterio que E11; coincidimos en que es restricción de proceso.\\
+\bottomrule
+\end{tabularx}
+\normalsize
+
+\textbf{Diferencias en la cuantificación.} En E03 su umbral es 3 s en la interfaz y el mío 2 s en el servidor; en E07 su propuesta cubre solo el control de acceso y la mía añade TLS, cifrado y prueba de seguridad; en E10 su prueba usa 20 participantes y 5 min, y la mía 10 participantes, 3 min y SUS; en E14 propone 99,99\,\% (unos 4 min 19 s al mes) y yo 99,5\,\%; en E18 prioriza la correspondencia de datos y los duplicados, y yo además el 99\,\% de éxito en 5 s. Ambos coincidimos en que los umbrales son propuestas a validar con los interesados.
+
+%---------------------------------------------------------------------
+\section{Supuestos y consistencia entre requisitos}
+\begin{itemize}
+\item \textbf{Criterio de nivel.} Un enunciado es de \emph{sistema} si involucra hardware, servicios externos, infraestructura, personas o la plataforma completa, y de \emph{software} si describe solo la aplicación. Es una convención del taller y la parte más discutible de la tabla.
+\item \textbf{E14 frente a E19.} Una disponibilidad de 99,9\,\% mensual equivale a unos 43 min de caída al mes, de los cuales una sola recuperación de 30 min (E19) consumiría casi todo el margen. Por eso se propone 99,5\,\% con interrupciones de $\leq$ 30 min.
+\item \textbf{E03 frente a E10.} El tiempo de respuesta se mide en el servidor bajo carga; la usabilidad se mide con personas, por lo que ambas pruebas son independientes.
+\item \textbf{Umbrales.} No son datos medidos del policlínico; requieren validación del director médico y del área de TI.
+\end{itemize}
+
+%---------------------------------------------------------------------
+\section{Conclusión}
+La clasificación separa lo que la plataforma debe hacer (funcionales), qué tan bien debe hacerlo (calidad, con su característica ISO/IEC 25010:2023) y qué condiciones le vienen impuestas (restricciones de producto y de proceso). Expresiones como «rápida», «segura» o «sin problemas» no permiten decidir si el sistema cumple; al convertirlas en métrica, unidad, umbral y prueba se vuelven aceptables o rechazables. Contrastar con un compañero muestra además que el nivel (sistema o software) depende del criterio adoptado y que ese criterio debe declararse.
+
+%---------------------------------------------------------------------
+\section{Declaración de uso de inteligencia artificial}
+Declaro que utilicé herramientas de IA generativa como apoyo: ChatGPT (OpenAI) para una primera versión del documento y Claude (Anthropic) para revisar el texto frente a la guía y la lista de cotejo, corregir inconsistencias y mejorar la redacción. Revisé las decisiones de clasificación y los umbrales contrastándolos con el caso y con las definiciones citadas, y soy responsable del contenido final, siguiendo el principio de transparencia del código de ética de la ACM \cite{acm}.
+
+\begin{thebibliography}{9}
+\bibitem{pohl} K. Pohl, \textit{Requirements Engineering: Fundamentals, Principles, and Techniques}, 2nd ed. Springer, Berlin, Heidelberg, 2025. ISBN 978-3-662-69204-2.
+\bibitem{iso29148} ISO/IEC/IEEE, \textit{ISO/IEC/IEEE 29148:2018, Systems and software engineering -- Life cycle processes -- Requirements engineering}. International Standard, 2018.
+\bibitem{iso25010} ISO/IEC, \textit{ISO/IEC 25010:2023, Systems and software engineering -- Systems and software Quality Requirements and Evaluation (SQuaRE) -- Product quality model}. International Standard, 2023.
+\bibitem{lopdp} Asamblea Nacional del Ecuador, \textit{Ley Orgánica de Protección de Datos Personales}. Registro Oficial, Quinto Suplemento No. 459, 26 de mayo de 2021.
+\bibitem{acm} Association for Computing Machinery, \textit{ACM Code of Ethics and Professional Conduct}. \url{https://www.acm.org/code-of-ethics}, 2018. Consultado el 27 de octubre de 2026.
+\end{thebibliography}
+\end{document}
