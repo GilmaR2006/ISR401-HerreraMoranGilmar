@@ -1,0 +1,267 @@
+% TA-IND-01 - Trabajo individual: IEEE 29148 y tipos de requisitos de un sistema conocido
+% Contenido del estudiante pasado a la plantilla (formato unicamente).
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage[margin=2cm]{geometry}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+\usepackage{fancyhdr}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+
+\graphicspath{{figuras/}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+\setlength{\emergencystretch}{2em}
+
+\setlength{\headheight}{14pt}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{UTEQ Ingeniería de Requerimientos (ISR-401)}
+\rhead{TA-IND-01}
+\cfoot{\thepage}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\begin{document}
+
+% ---------- Portada / datos ----------
+\begin{center}
+  {\Large\bfseries IEEE 29148 y tipos de requisitos de un sistema conocido}\\[0.4em]
+  {\large Análisis aplicado al sistema web PasteleriaWeb}\\[0.8em]
+  Herrera Moran Gilmar Javier\\
+  Universidad Técnica Estatal de Quevedo\\
+  Ingeniería de Software -- ISR-401\\
+  Noviembre de 2026\\[0.8em]
+  \textbf{Docente:} Gleiston Cicerón Guerrero Ulloa, PhD\\
+  \textbf{Repositorio académico:} \url{https://github.com/GilmaR2006/ISR401-HerreraMoranGilmar}\\
+  \textbf{Sistema analizado:} \url{https://github.com/Mery-003/PasteleriaWeb}
+\end{center}
+
+\begin{abstract}
+Este informe aplica los fundamentos de la norma ISO/IEC/IEEE 29148:2018 al sistema web PasteleriaWeb, utilizado como caso de estudio para identificar y especificar necesidades de clientes y personal de una pastelería. Se sintetizan los criterios para redactar requisitos bien formados, se presenta un glosario, y se proponen quince requisitos clasificados por tipo. Cinco requisitos de calidad se relacionan con características y subcaracterísticas de ISO/IEC 25010:2023 y se expresan mediante métricas y umbrales verificables. Finalmente, se incluye una revisión de calidad de los enunciados y una reflexión sobre el proceso de especificación.
+\end{abstract}
+
+% ---------- 1. Sistema ----------
+\section{Descripción del sistema seleccionado}
+PasteleriaWeb se toma como un sistema web orientado a apoyar la presentación del catálogo de productos de una pastelería y la gestión de solicitudes y pedidos. Sus usuarios considerados son los clientes, quienes consultan productos y realizan pedidos o solicitudes de personalización, y el personal responsable de administrar productos y atender los pedidos. Para el análisis se consideran los procesos de autenticación, consulta del catálogo, carrito, personalización de postres y registro/seguimiento de pedidos. El proyecto de referencia es el repositorio \url{https://github.com/Mery-003/PasteleriaWeb.git}. Los requisitos de este documento son una especificación propuesta para evaluar el sistema; los valores de rendimiento y calidad son objetivos de aceptación que deberán comprobarse mediante pruebas, no resultados medidos ni afirmaciones de que ya estén implementados.
+
+% ---------- 2. Resumen analitico ----------
+\section{Resumen analítico de ISO/IEC/IEEE 29148:2018}
+
+\subsection{Construcción de un requisito bien formado (cláusula 5.2.4)}
+Un requisito bien formado expresa una necesidad o capacidad de manera que pueda ser entendida por las partes interesadas y comprobada por quienes desarrollan y validan el sistema. La cláusula 5.2.4 orienta a redactarlo con un sujeto identificable, una condición o contexto cuando corresponda y una obligación o capacidad concreta. No basta con describir una intención general, como “el sistema debe ser rápido”; es necesario establecer qué operación se ejecuta, bajo qué condiciones y cuál es el resultado esperado. Por ello, en este trabajo se emplean identificadores únicos, un solo comportamiento principal por enunciado y criterios de aceptación medibles cuando la naturaleza del requisito lo permite \cite{iso29148}.
+
+La redacción debe evitar mezclar varias obligaciones independientes en una sola frase. Si un requisito contiene, por ejemplo, registrar clientes, modificar productos y generar reportes, su verificación se vuelve difícil porque cada acción requiere pruebas diferentes. Separar esas obligaciones facilita asignar prioridades, relacionar cada requisito con una prueba y gestionar cambios sin afectar innecesariamente otras funciones. También se debe distinguir el requisito de sus atributos de gestión: el identificador, la prioridad, la fuente o el estado ayudan a administrar el requisito, pero no sustituyen el contenido que describe la necesidad \cite{iso29148}.
+
+\subsection{Características de un requisito individual (cláusula 5.2.5)}
+La cláusula 5.2.5 establece características que permiten evaluar la calidad de cada requisito. En la interpretación aplicada al caso se consideran nueve:
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Necesario:} representa una necesidad real de un usuario o una obligación del sistema; no incluye funciones sin justificación.
+  \item \textbf{Apropiado:} mantiene el nivel de detalle correcto para la etapa y el tipo de especificación, sin imponer decisiones de diseño que no sean necesarias.
+  \item \textbf{No ambiguo:} admite una sola interpretación razonable. Expresiones subjetivas deben reemplazarse por condiciones concretas.
+  \item \textbf{Completo:} contiene la información necesaria para comprender y verificar el comportamiento, incluyendo condiciones relevantes.
+  \item \textbf{Singular:} expresa una sola exigencia principal, evitando combinar varias funciones independientes.
+  \item \textbf{Factible:} puede implementarse dentro de las restricciones técnicas, económicas y operativas del proyecto.
+  \item \textbf{Verificable:} existe un método objetivo de inspección, análisis, demostración o prueba para decidir si se cumple.
+  \item \textbf{Correcto:} representa fielmente la necesidad de la fuente y no contradice las reglas del negocio.
+  \item \textbf{Conforme:} respeta la estructura, el vocabulario y las convenciones acordadas para la especificación.
+\end{enumerate}
+Estas características se revisan de forma conjunta. Un enunciado puede ser claro, pero no necesario; también puede ser necesario, pero imposible de verificar si utiliza términos subjetivos. Por esta razón, la calidad no depende de que el requisito suene técnico, sino de que describa una necesidad válida con precisión suficiente para diseñar una comprobación \cite{iso29148,pohl2025}.
+
+\subsection{Características del conjunto de requisitos (cláusula 5.2.6)}
+La revisión no termina al validar cada enunciado por separado. El conjunto debe cubrir el alcance acordado y mantener coherencia entre sus elementos. En el contexto de PasteleriaWeb, por ejemplo, los requisitos del carrito, el pedido y el pago deben utilizar los mismos conceptos y no establecer reglas incompatibles sobre cuándo se confirma una compra. Además, el conjunto debe ser completo respecto del alcance definido, consistente, factible como totalidad, comprensible y susceptible de validación. La trazabilidad entre necesidades, requisitos y pruebas ayuda a detectar omisiones y contradicciones antes de implementar \cite{iso29148,swebok4}.
+
+Un conjunto equilibrado también evita concentrarse únicamente en funciones visibles. Un catálogo que permite consultar productos puede cumplir su objetivo funcional y, aun así, resultar inadecuado si se tarda demasiado, expone información de clientes o no informa claramente los errores. Por ello, se combinan requisitos funcionales con requisitos de interfaz, desempeño, proceso y calidad. La clasificación no es decorativa: permite comprobar que se han considerado distintas perspectivas del sistema y que cada requisito dispone de un criterio de aceptación apropiado.
+
+\subsection{Lenguaje y términos ambiguos (cláusula 5.2.7)}
+La norma recomienda utilizar lenguaje preciso y evitar expresiones que dependen de la opinión de quien evalúa. En particular, palabras como “rápido”, “fácil”, “intuitivo”, “adecuado”, “suficiente”, “normalmente”, “en lo posible” o “amigable” no establecen por sí mismas una condición comprobable. También se deben evitar cuantificadores imprecisos como “varios”, “muchos” o “algunos”, así como expresiones abiertas como “etcétera”. En su lugar, se deben definir límites, unidades, condiciones y resultados observables.
+
+Por ejemplo, “el catálogo debe cargar rápido” no permite decidir cuándo se cumple. Una versión verificable sería: “En una conexión de prueba de 20 Mbps y con 50 productos registrados, el sistema mostrará la primera vista utilizable del catálogo en un máximo de 3 segundos en al menos 95 de cada 100 ejecuciones”. La cifra constituye un umbral propuesto para este ejercicio y deberá validarse con pruebas reproducibles. El mismo criterio se aplica a la seguridad y a la usabilidad: no se afirma que el sistema sea “seguro” o “fácil”, sino que se establecen comportamientos medibles y escenarios de evaluación \cite{iso29148,iso25010}.
+
+% ---------- 3. Glosario ----------
+\section{Glosario de la cláusula 3}
+Las definiciones siguientes están parafraseadas para el caso de estudio; los ejemplos son propios.
+
+\begin{longtable}{@{}L{0.24\textwidth} L{0.36\textwidth} L{0.30\textwidth}@{}}
+\caption{Glosario de términos de la cláusula 3 de ISO/IEC/IEEE 29148.}\label{tab:glosario}\\
+\toprule
+\textbf{Término} & \textbf{Definición parafraseada} & \textbf{Ejemplo en PasteleriaWeb} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Término} & \textbf{Definición parafraseada} & \textbf{Ejemplo en PasteleriaWeb} \\
+\midrule
+\endhead
+Stakeholder (parte interesada) & Persona u organización que influye en el sistema o recibe sus efectos. & Cliente, dueño, empleado y repartidor. \\
+Requisito & Necesidad o condición que debe satisfacer una solución. & El cliente necesita consultar el precio de una torta. \\
+Requisito funcional & Capacidad o comportamiento que el sistema debe proporcionar. & Agregar un producto al carrito. \\
+Requisito de calidad & Condición relacionada con el grado en que el sistema satisface atributos de calidad. & Mostrar el catálogo en un tiempo máximo definido. \\
+Sistema & Conjunto de elementos que interactúan para lograr un propósito. & Aplicación web, base de datos y usuarios de la pastelería. \\
+Interfaz & Límite mediante el cual dos entidades intercambian información. & Formulario web para registrar una dirección de entrega. \\
+Verificación & Comprobación de que un producto o requisito cumple condiciones especificadas. & Ejecutar una prueba que confirme el límite de tiempo de carga. \\
+Validación & Confirmación de que la solución satisface la necesidad de sus usuarios. & Comprobar con clientes que el flujo de pedido cubre su necesidad. \\
+Restricción & Condición que limita las alternativas de solución. & El sistema debe operar en navegadores web modernos. \\
+Trazabilidad & Capacidad de relacionar un requisito con su origen y con artefactos posteriores. & Vincular el requisito de carrito con su caso de prueba. \\
+\bottomrule
+\end{longtable}
+
+% ---------- 4. Requisitos ----------
+\section{Especificación de requisitos}
+Los siguientes quince enunciados son requisitos propuestos, construidos a partir del alcance funcional conocido del proyecto y de objetivos de calidad definidos para la actividad. Los umbrales de calidad no se presentan como mediciones existentes: son metas que deben ser aceptadas por el responsable del sistema y comprobadas en un entorno de prueba.
+
+\subsection{Listado y clasificación}
+\begin{longtable}{@{}L{0.08\textwidth} L{0.42\textwidth} L{0.15\textwidth} L{0.21\textwidth}@{}}
+\caption{Listado y clasificación de los quince requisitos.}\label{tab:clasificacion}\\
+\toprule
+\textbf{ID} & \textbf{Enunciado del requisito} & \textbf{Tipo} & \textbf{Verificación / aceptación} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Enunciado del requisito} & \textbf{Tipo} & \textbf{Verificación / aceptación} \\
+\midrule
+\endhead
+RF-01 & El sistema permitirá al cliente crear una cuenta ingresando nombre, correo electrónico y contraseña; rechazará el registro si el correo ya está asociado a otra cuenta. & Funcional & Prueba de registro válido y correo duplicado. \\
+RF-02 & El sistema permitirá al cliente iniciar sesión con correo y contraseña registrados y mostrará un mensaje de autenticación fallida cuando las credenciales no coincidan. & Funcional & Prueba positiva y negativa de acceso. \\
+RF-03 & El sistema mostrará el catálogo de productos con nombre, imagen, descripción y precio de cada producto activo. & Funcional & Inspección de todos los campos en productos activos. \\
+RF-04 & El sistema permitirá agregar un producto del catálogo al carrito y actualizará el subtotal correspondiente. & Funcional & Subtotal igual a cantidad por precio. \\
+RF-05 & El sistema permitirá enviar una solicitud de personalización de torta con tipo, tamaño, evento y descripción de la decoración. & Funcional & La solicitud conserva los campos ingresados. \\
+RI-01 & El sistema presentará el formulario de registro con etiquetas visibles para nombre, correo y contraseña, asociadas a sus respectivos campos. & Interfaz externa & Inspección visual y prueba de accesibilidad del formulario. \\
+RI-02 & El sistema mostrará al cliente el resumen del carrito con nombre del producto, cantidad, precio unitario y subtotal antes de confirmar el pedido. & Interfaz externa & Los cuatro datos aparecen antes de confirmar. \\
+RP-01 & Ante el envío de un formulario con campos obligatorios vacíos, el sistema señalará cada campo faltante y conservará los datos válidos ya ingresados. & Proceso & Prueba con al menos dos campos vacíos. \\
+RD-01 & Con 50 productos activos y una conexión de prueba de 20 Mbps, el catálogo mostrará su primera vista utilizable en un máximo de 3 s en al menos 95 de 100 ejecuciones. & Desempeño / calidad & 95/100 ejecuciones $\leq$ 3 s. \\
+RC-01 & En una prueba de 100 solicitudes concurrentes de consulta del catálogo, al menos el 99\,\% finalizará sin error HTTP 5xx. & Fiabilidad & Éxito $\geq$ 99\,\% de solicitudes. \\
+RC-02 & El sistema bloqueará el acceso a las funciones de gestión de productos a usuarios sin sesión autorizada en el 100\,\% de los casos de prueba definidos. & Seguridad & 0 accesos no autorizados en 50 intentos. \\
+RC-03 & El sistema validará el formato del correo electrónico antes de aceptar un registro y rechazará el 100\,\% de los 20 formatos inválidos definidos para la prueba. & Seguridad / protección frente a errores & 20/20 formatos inválidos rechazados. \\
+RC-04 & En una prueba con 10 usuarios representativos, al menos 9 completarán la incorporación de un producto al carrito sin ayuda y en un máximo de 60 s. & Capacidad de interacción / usabilidad & 9/10 usuarios, tiempo $\leq$ 60 s. \\
+RC-05 & El sistema mostrará una explicación textual junto a cada error de validación del formulario y el mensaje identificará el campo que debe corregirse en el 100\,\% de 20 casos de prueba. & Capacidad de interacción / protección frente a errores del usuario & 20/20 mensajes identifican el campo. \\
+RC-06 & El sistema mantendrá disponibles las funciones de consulta del catálogo durante al menos el 99.5\,\% del tiempo de una ventana de prueba de 30 días, excluyendo mantenimientos programados informados. & Fiabilidad / disponibilidad & Disponibilidad $\geq$ 99.5\,\%. \\
+\bottomrule
+\end{longtable}
+
+\subsection{Relación de requisitos de calidad con ISO/IEC 25010:2023}
+La clasificación de esta tabla utiliza el modelo de calidad del producto de ISO/IEC 25010:2023. Se seleccionan las características y subcaracterísticas que guardan relación con cada requisito. Las métricas y umbrales son criterios propuestos para este caso; no equivalen a resultados experimentales.
+
+\begin{longtable}{@{}L{0.08\textwidth} L{0.22\textwidth} L{0.24\textwidth} L{0.30\textwidth}@{}}
+\caption{Características y subcaracterísticas ISO/IEC 25010:2023 de los requisitos de calidad.}\label{tab:iso25010}\\
+\toprule
+\textbf{ID} & \textbf{Característica} & \textbf{Subcaracterística} & \textbf{Métrica y umbral} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Característica} & \textbf{Subcaracterística} & \textbf{Métrica y umbral} \\
+\midrule
+\endhead
+RD-01 & Eficiencia de desempeño & Comportamiento temporal & Tiempo de primera vista utilizable: $\leq$ 3 s en 95/100 ejecuciones. \\
+RC-01 & Fiabilidad & Tolerancia a fallos & Respuestas sin HTTP 5xx: $\geq$ 99\,\% de 100 solicitudes concurrentes. \\
+RC-02 & Seguridad & Control de acceso & Intentos no autorizados bloqueados: 50/50 (100\,\%). \\
+RC-04 & Capacidad de interacción & Aprendizabilidad / operabilidad & Usuarios que completan tarea sin ayuda: $\geq$ 9/10, en $\leq$ 60 s. \\
+RC-05 & Capacidad de interacción & Protección frente a errores del usuario & Mensajes que identifican campo: 20/20 (100\,\%). \\
+RC-06 & Fiabilidad & Disponibilidad & Tiempo disponible: $\geq$ 99.5\,\% en 30 días. \\
+\bottomrule
+\end{longtable}
+
+\textit{Nota:} Se incluyen seis requisitos de calidad para superar el mínimo de cinco solicitado. La terminología de características y subcaracterísticas debe cotejarse con la edición oficial de ISO/IEC 25010:2023 disponible para el curso antes de la entrega final.
+
+% ---------- 5. Aceptacion y trazabilidad ----------
+\section{Tabla de aceptación y trazabilidad}
+La tabla anterior incorpora un criterio de aceptación por requisito. Para convertirlos en pruebas, cada criterio debe asociarse a un caso de prueba con precondiciones, datos, pasos y resultado observado. Por ejemplo, RF-04 se verifica agregando un producto con precio conocido y cantidad definida, y comprobando que el subtotal sea el producto de ambos valores. RC-02 requiere preparar cuentas con distintos permisos e intentar acceder a la gestión de productos desde una sesión no autorizada. Los resultados deben registrarse en evidencias reales; no se deben reemplazar por capturas ilustrativas.
+
+% ---------- 6. Autoevaluacion ----------
+\section{Autoevaluación de los requisitos}
+Se revisaron los quince requisitos con las características de 5.2.5 y el lenguaje de 5.2.7. Los ejemplos siguientes muestran enunciados preliminares que fallaban por ambigüedad y su corrección. Las versiones preliminares se incluyen para evidenciar el proceso de mejora.
+
+\begin{longtable}{@{}L{0.09\textwidth} L{0.34\textwidth} L{0.43\textwidth}@{}}
+\caption{Autoevaluación: versión anterior y versión corregida.}\label{tab:autoeval}\\
+\toprule
+\textbf{ID} & \textbf{Versión anterior} & \textbf{Versión corregida} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Versión anterior} & \textbf{Versión corregida} \\
+\midrule
+\endhead
+RD-01 & El catálogo debe cargar rápido. & Con 50 productos activos y conexión de 20 Mbps, la primera vista utilizable se mostrará en $\leq$ 3 s en 95/100 ejecuciones. \\
+RC-01 & El sistema debe soportar muchos clientes sin fallar. & En 100 solicitudes concurrentes, al menos el 99\,\% finalizará sin error HTTP 5xx. \\
+RC-02 & El sistema debe ser seguro y no dejar entrar a cualquiera. & El acceso a gestión de productos será bloqueado en 50/50 intentos de usuarios sin autorización. \\
+RC-04 & El carrito debe ser fácil de usar. & Al menos 9 de 10 usuarios completarán la tarea sin ayuda en un máximo de 60 s. \\
+RC-05 & Los errores deben explicarse bien. & En 20/20 casos, el mensaje de validación identificará textualmente el campo que debe corregirse. \\
+\bottomrule
+\end{longtable}
+
+\subsection{Lista de comprobación aplicada}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Necesario y apropiado:} cada requisito corresponde a una función o atributo relevante para la compra y administración de productos de la pastelería.
+  \item \textbf{No ambiguo y completo:} se sustituyeron expresiones subjetivas por cantidades, condiciones y resultados observables cuando era posible.
+  \item \textbf{Singular:} cada enunciado expresa una obligación principal; los datos de aceptación complementan su verificación.
+  \item \textbf{Factible:} los umbrales se consideran objetivos iniciales de prueba y deberán ajustarse si las capacidades reales del entorno lo justifican.
+  \item \textbf{Verificable:} cada requisito cuenta con inspección, demostración o prueba propuesta.
+  \item \textbf{Correcto y conforme:} la especificación se mantiene dentro del alcance del sistema elegido y utiliza identificadores y redacción uniforme.
+\end{itemize}
+
+La revisión del conjunto también debe confirmar que no existan requisitos contradictorios y que cada necesidad tenga una prueba asociada. La comprobación definitiva exige ejecutar las pruebas en el sistema real y conservar los resultados.
+
+% ---------- 7. Evidencias ----------
+\section{Evidencias del sistema}
+La guía solicita al menos tres capturas propias. Deben tomarse directamente de una ejecución real de PasteleriaWeb, sin datos personales de clientes. Coloque los archivos en \texttt{figuras/} y utilice estos nombres:
+\begin{enumerate}[leftmargin=*]
+  \item \texttt{catalogo.png}: catálogo con productos y sus datos visibles.
+  \item \texttt{carrito.png}: carrito con producto, cantidad y subtotal.
+  \item \texttt{personalizacion.png}: formulario o pantalla de solicitud de personalización.
+\end{enumerate}
+\textbf{Importante:} no se incluyen imágenes fabricadas ni se afirma que estas pantallas estén implementadas sin verificarlas. Una vez que se agreguen las capturas reales, se recomienda insertar cada una con \verb|\includegraphics| y describir qué requisito respalda.
+
+La Figura~\ref{fig:catalogo} muestra la pantalla de inicio con el catálogo de productos y respalda RF-03 y RD-01. La Figura~\ref{fig:carrito} muestra el carrito con producto, cantidad y subtotal, y respalda RF-04 y RI-02. La Figura~\ref{fig:personalizacion} muestra la pantalla de personalización de postres y respalda RF-05.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.45\textwidth]{catalogo.png}
+  \caption{Pantalla de inicio de la pastelería JUME con el catálogo de productos. Respalda RF-03 y RD-01.}
+  \label{fig:catalogo}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.45\textwidth]{carrito.png}
+  \caption{Carrito con producto, cantidad, precio y subtotal. Respalda RF-04 y RI-02.}
+  \label{fig:carrito}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.45\textwidth]{personalizacion.png}
+  \caption{Pantalla de personalización de postre con tipo, sabor, decoración y cantidad. Respalda RF-05.}
+  \label{fig:personalizacion}
+\end{figure}
+
+% ---------- 8. Reflexion ----------
+\section{Reflexión}
+La parte que presentó mayor dificultad fue la formulación de los requisitos de calidad, especialmente los relacionados con usabilidad, seguridad y fiabilidad. En los requisitos funcionales resulta más directo describir una acción, como consultar un producto o agregarlo al carrito. En cambio, indicar que una aplicación debe ser segura o fácil de utilizar no permite comprobar por sí solo si la condición se cumple. Fue necesario convertir esas ideas en escenarios de prueba, definir una población o cantidad de intentos y establecer un límite que permita aceptar o rechazar el resultado.
+
+También fue importante diferenciar una meta propuesta de un resultado medido. Por ejemplo, establecer que el catálogo debe responder en tres segundos no demuestra que actualmente lo haga; únicamente define el comportamiento esperado. Para conocer el resultado real se requiere ejecutar pruebas con datos y condiciones controladas. Esta distinción evita presentar suposiciones como evidencias.
+
+La aplicación de ISO/IEC/IEEE 29148:2018 permitió comprender que redactar requisitos no consiste solamente en enumerar funciones. Cada enunciado debe representar una necesidad, ser claro, mantenerse dentro del alcance y permitir una verificación objetiva. Además, el conjunto debe ser coherente: los requisitos del catálogo, carrito, personalización y pedidos deben describir un flujo compatible. En conclusión, una especificación de calidad reduce interpretaciones diferentes entre usuarios y desarrolladores y sirve como base para diseñar, implementar y evaluar el sistema.
+
+% ---------- 9. Declaracion de uso de IA ----------
+\section{Declaración de apoyo con inteligencia artificial}
+Se utilizó ChatGPT (modelo GPT-6) como apoyo para organizar un borrador, revisar la estructura de los requisitos y proponer métricas iniciales. El estudiante debe verificar cada afirmación frente a la norma oficial, contrastar los requisitos con el código y funcionamiento real de PasteleriaWeb, reemplazar o corregir cualquier contenido que no corresponda y redactar con sus propias palabras la versión final. Las capturas, pruebas y resultados deben ser obtenidos por el estudiante. Esta declaración no sustituye la responsabilidad de autoría y verificación.
+
+% ---------- Referencias ----------
+% Bibliografia incrustada (no requiere BibTeX). El orden sigue la primera aparicion de cada cita.
+% Los mismos datos estan en referencias.bib. Verificar cada dato contra la obra real.
+\begin{thebibliography}{9}
+\bibitem{iso29148} ISO/IEC/IEEE, \textit{ISO/IEC/IEEE 29148:2018: Systems and software engineering---Life cycle processes---Requirements engineering}. Geneva, Switzerland: International Organization for Standardization, 2018.
+\bibitem{pohl2025} K. Pohl, \textit{Requirements Engineering: Fundamentals, Principles, and Techniques}, 2nd ed. Berlin, Heidelberg, Germany: Springer, 2025, ISBN: 978-3-662-69204-2.
+\bibitem{swebok4} H. Washizaki, Ed., \textit{Guide to the Software Engineering Body of Knowledge (SWEBOK Guide), Version 4.0}. Los Alamitos, CA, USA: IEEE Computer Society, 2024.
+\bibitem{iso25010} ISO/IEC, \textit{ISO/IEC 25010:2023: Systems and software engineering---Systems and software Quality Requirements and Evaluation (SQuaRE)---Product quality model}. Geneva, Switzerland: International Organization for Standardization, 2023.
+\end{thebibliography}
+
+\end{document}
